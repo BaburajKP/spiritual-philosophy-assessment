@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Assessment: Spiritual Philosophy at the Workplace</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7fa;
+            color: #222;
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+        }
+        h1, h2 {
+            color: #476395;
+        }
+        .intro {
+            background: #f1f4fb;
+            padding: 18px 20px;
+            border-radius: 7px;
+            margin-bottom: 18px;
+            font-size: 1.08em;
+        }
+        .assessment {
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+        }
+        .question {
+            margin: 18px 0 6px 0;
+        }
+        .option {
+            margin-left: 16px;
+            font-weight: normal;
+        }
+        .form-section {
+            margin: 24px 0 20px 0;
+        }
+        input[type="text"] {
+            padding: 7px;
+            width: 230px;
+            border: 1px solid #b3c6e6;
+            margin-bottom: 12px;
+            border-radius: 4px;
+        }
+        button {
+            padding: 9px 22px;
+            background: #476395;
+            color: #fff;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 14px;
+        }
+        button:disabled {
+            background: #b9bdd4;
+            cursor: not-allowed;
+        }
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 32px;
+            background: #fff;
+        }
+        .result-table th, .result-table td {
+            border: 1px solid #c4ccd5;
+            padding: 10px 14px;
+            text-align: left;
+        }
+        .result-table th {
+            background-color: #f1f4fb;
+            color: #476395;
+        }
+        .percentage {
+            color: #2d7b2d;
+            font-weight: bold;
+        }
+        .msg {
+            margin-top: 18px;
+            color: #285f28;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Online Assessment: Spiritual Philosophy at the Workplace</h1>
+    <div class="intro">
+        Today I wish to share a few thoughts on spiritual philosophy at the workplace.<br><br>
+        Spiritual philosophy is about finding meaning and purpose in what we do, and connecting our daily work with our deeper values like honesty, compassion, and respect.<br>
+        In the office, this does not mean religion, rituals, or preaching. It simply means remembering that we are human beings first and employees next, and that our work is not only for salary, [...]
+        For example, when we choose to speak truthfully with a client, even if it is uncomfortable, we are practicing the spiritual value of integrity.<br>
+        When a teammate is struggling with workload and we voluntarily help them, we show compassion and a sense of oneness, which builds trust and teamwork.<br>
+        Another example is how we handle stress and conflicts. Spiritual philosophy encourages us to pause, breathe, and respond calmly instead of reacting with anger.  A simple one-minute mindful[...]
+        Spiritual values also guide leadership. A leader who listens deeply, takes fair decisions, and keeps commitments creates a culture where people feel respected and safe. In such an environm[...]
+        Let us try to bring these spiritual principles into our daily work—through honesty in our tasks, kindness in our words, and calmness in our reactions.<br>
+        When we work with this inner awareness, the office becomes not just a place to earn, but a place to learn, grow, and serve each other better.
+    </div>
+    <div class="assessment">
+        <form id="assessmentForm" autocomplete="off">
+            <div class="form-section">
+                <label for="memberName">Your Name:</label><br>
+                <input type="text" id="memberName" name="memberName" required placeholder="Enter your name">
+            </div>
+            <div class="question">
+                1. Is spiritual philosophy at the workplace about connecting our work with honesty, compassion, and respect?
+            </div>
+            <div>
+                <label class="option"><input type="radio" name="q1" value="Yes" required> Yes</label>
+                <label class="option"><input type="radio" name="q1" value="No"> No</label>
+            </div>
+            <div class="question">
+                2. Does practicing spiritual values at work mean following a particular religion or ritual?
+            </div>
+            <div>
+                <label class="option"><input type="radio" name="q2" value="Yes" required> Yes</label>
+                <label class="option"><input type="radio" name="q2" value="No"> No</label>
+            </div>
+            <div class="question">
+                3. Can helping a struggling teammate be an example of practicing spiritual philosophy?
+            </div>
+            <div>
+                <label class="option"><input type="radio" name="q3" value="Yes" required> Yes</label>
+                <label class="option"><input type="radio" name="q3" value="No"> No</label>
+            </div>
+            <div class="question">
+                4. Does taking a mindfulness break or reflecting before sending a tough email help create a peaceful atmosphere at work?
+            </div>
+            <div>
+                <label class="option"><input type="radio" name="q4" value="Yes" required> Yes</label>
+                <label class="option"><input type="radio" name="q4" value="No"> No</label>
+            </div>
+            <div class="question">
+                5. According to the speech, should leaders make fair decisions and keep commitments to build a good workplace culture?
+            </div>
+            <div>
+                <label class="option"><input type="radio" name="q5" value="Yes" required> Yes</label>
+                <label class="option"><input type="radio" name="q5" value="No"> No</label>
+            </div>
+            <button type="submit">Submit Assessment</button>
+        </form>
+        <div id="message" class="msg"></div>
+    </div>
+    <h2>Attended Members' Results</h2>
+    <table class="result-table" id="resultsTable">
+        <tr>
+            <th>Name</th>
+            <th>Score</th>
+            <th>Percentage</th>
+        </tr>
+    </table>
+
+    <script>
+        // Correct answers
+        const correctAnswers = {
+            q1: "Yes",
+            q2: "No",
+            q3: "Yes",
+            q4: "Yes",
+            q5: "Yes"
+        };
+
+        // Get references
+        const form = document.getElementById('assessmentForm');
+        const resultsTable = document.getElementById('resultsTable');
+        const messageDiv = document.getElementById('message');
+
+        // For demo - results can only persist for this browser/tab unless extended with more storage/server
+        function getStoredResults() {
+            let results = [];
+            try {
+                results = JSON.parse(localStorage.getItem('spiritual_results')) || [];
+            } catch { results = []; }
+            return results;
+        }
+        function storeResult(result) {
+            let results = getStoredResults();
+            results.push(result);
+            localStorage.setItem('spiritual_results', JSON.stringify(results));
+        }
+        function showResults() {
+            // Remove all rows except header
+            while (resultsTable.rows.length > 1) resultsTable.deleteRow(1);
+            let results = getStoredResults();
+            results.forEach(r => {
+                const row = resultsTable.insertRow();
+                row.insertCell().textContent = r.name;
+                row.insertCell().textContent = r.score + " / 5";
+                let percCell = row.insertCell();
+                percCell.textContent = r.percentage + "%";
+                percCell.className = "percentage";
+            });
+        }
+
+        // Handle form submission
+        form.onsubmit = function(e) {
+            e.preventDefault();
+
+            // Basic validation
+            const name = form.memberName.value.trim();
+            if(name.length === 0) {
+                messageDiv.style.color = "#b82121";
+                messageDiv.textContent = "Please enter your name.";
+                return;
+            }
+
+            let score = 0;
+            for(let i = 1; i <= 5; i++) {
+                let q = "q" + i;
+                const ans = form[q].value;
+                if(ans === correctAnswers[q]) score++;
+            }
+            const percent = Math.round((score / 5) * 100);
+
+            storeResult({
+                name: name,
+                score: score,
+                percentage: percent
+            });
+
+            // Feedback
+            messageDiv.style.color = "#285f28";
+            messageDiv.textContent = `Thank you, ${name}! You scored ${score}/5 (${percent}%). Your result has been recorded below.`;
+
+            form.reset();
+
+            showResults();
+        };
+
+        // Initial results display
+        showResults();
+    </script>
+</body>
+</html>
